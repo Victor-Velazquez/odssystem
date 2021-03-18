@@ -1,0 +1,159 @@
+﻿@model IEnumerable<ODS.DataLayer.ods_tablero_indicador_ods_vw>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="card-header">
+        <img src="~/Images/format/sdg-header-es.png" alt="header" class="responsive">
+    </div>
+    <div class="row">
+</div>
+
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active">Tablero de Indicadores</li>
+    <li class="breadcrumb-item">
+        <a href="~/ods_tablero_indicador/Create">Configurar</a>
+    </li>
+</ol>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-xl-3 col-sm-6 mb-3">
+            <div class="card text-white bg-dark o-hidden h-100">
+                <div class="card-body">
+                    <div class="card-body-icon">
+                        @{
+                            if (item.Avance >= 0 && item.Avance <= 30)
+                            {
+                                <i class='fas fa-tachometer-alt' style='font-size:84px;color:red'></i>
+                            }
+                            else if (item.Avance > 30 && item.Avance <= 80)
+                            {
+                                <i class='fas fa-tachometer-alt' style='font-size:84px;color:yellow'></i>
+                            }
+                            else if (item.Avance > 80 && item.Avance <= 100)
+                            {
+                                <i class='fas fa-tachometer-alt' style='font-size:84px;color:green'></i>
+                            }
+                        }
+                    </div>
+                    <div class="mr-5">
+                        <img src="@Url.Content(string.Format("../Images/big_icons/sdg-es-{0}.png", item.IdObjetivo))" alt="Objetivo" class="responsive">
+                    </div>
+                </div>
+                <a class="card-footer text-white clearfix small z-1" href="#" data-toggle="modal" data-target="@String.Format("#Objetivo_{0}",item.IdObjetivo)">
+                    <span class="float-left" style="font-size:48px;">
+                        @Html.DisplayFor(modelItem => item.Avance)%
+                    </span>
+                    <span class="float-right">
+                        <i class="fas fa-angle-right"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Detalle del Objetivo -->
+        <div class="modal fade" id="@String.Format("Objetivo_{0}",item.IdObjetivo)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">@item.IdObjetivo -  @item.Objetivo</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                @{
+                                    if (item.Avance >= 0 && item.Avance <= 30)
+                                    {
+                                        <i class='fas fa-tachometer-alt' style='font-size:48px;color:red'></i>
+                                    }
+                                    else if (item.Avance > 30 && item.Avance <= 80)
+                                    {
+                                        <i class='fas fa-tachometer-alt' style='font-size:48px;color:yellow'></i>
+                                    }
+                                    else if (item.Avance > 80 && item.Avance <= 100)
+                                    {
+                                        <i class='fas fa-tachometer-alt' style='font-size:48px;color:green'></i>
+                                    }
+                                }
+                            </li>
+                            <li class="breadcrumb-item">
+                                % @String.Format("{0:00}", @item.Avance) de Avance
+                            </li>
+                        </ol>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active">Año</li>
+                            <li class="breadcrumb-item">
+                                @item.Anio
+                            </li>
+                        </ol>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active">Municipio</li>
+                            <li class="breadcrumb-item">
+                                @item.Municipio
+                            </li>
+                        </ol>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active"># Metas ODS 2035</li>
+                            <li class="breadcrumb-item">
+                                @item.MetasODS
+                            </li>
+                        </ol>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active"># Objetivos del Municipio</li>
+                            <li class="breadcrumb-item">
+                                @item.ObjetivosMunicipio
+                            </li>
+                        </ol>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active"># Metas del Municipio</li>
+                            <li class="breadcrumb-item">
+                                @item.MetasMunicipio | @Html.ActionLink( "Agregar","Create","ods_meta_municipio", new { idMunicipio = item.IdMunicipio }, null)
+                            </li>
+                        </ol>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active"># Indicadores del Municipio</li>
+                            <li class="breadcrumb-item">
+                                @item.IndicadoresMunicipio
+                            </li>
+                        </ol>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active">% de Avance</li>
+                            <li class="breadcrumb-item">
+                                @String.Format("{0:00}", @item.Avance)
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="button" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    }
+
+
+
+</div>
+
+
+<div class="card-footer small text-muted">
+
+</div>
+
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+
+

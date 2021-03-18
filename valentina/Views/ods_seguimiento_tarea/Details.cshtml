@@ -1,0 +1,58 @@
+﻿@model ODS.DataLayer.ods_seguimiento_tarea
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ods_seguimiento_tarea</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_interesado.Interesado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_interesado.Interesado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_tarea.Tarea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_tarea.Tarea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Avance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Avance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comentarios)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comentarios)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdSeguimiento }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

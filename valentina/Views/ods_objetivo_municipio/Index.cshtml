@@ -1,0 +1,81 @@
+﻿@model IEnumerable<ODS.DataLayer.ods_objetivo_municipio>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- DataTables Example -->
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Objetivos del Municipio  |   @Html.ActionLink("Agregar", "Create")
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_municipio.Municipio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Numeral)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ObjetivoMunicipio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Vigente)
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_municipio.Municipio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Numeral)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ObjetivoMunicipio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Vigente)
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ods_municipio.Municipio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Numeral)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ObjetivoMunicipio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Vigente)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Ir a las metas", "../ods_meta_municipio/Index", new { id = item.IdObjetivoMunicipio }) |
+                                @Html.ActionLink("Editar", "Edit", new { id = item.IdObjetivoMunicipio }) |
+                                @Html.ActionLink("Detalles", "Details", new { id = item.IdObjetivoMunicipio }) |
+                                @Html.ActionLink("Eliminar", "Delete", new { id = item.IdObjetivoMunicipio })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted">
+        @Html.ActionLink("Agregar", "Create")
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ODS.DataLayer.ods_tactica>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ods_municipio.Municipio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tactica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vigente)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ods_municipio.Municipio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tactica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vigente)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdTactica }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdTactica }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdTactica })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ODS.DataLayer.ods_tablero_indicador>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ods_indicador.Indicador)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Anio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorIndicador)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorAlcanzado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EscalaPositiva)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ods_objetivos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ods_metas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.municipio_objetivos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.municipio_metas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.municipio_tacticas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.municipio_tareas)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ods_indicador.Indicador)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Anio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorIndicador)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorAlcanzado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EscalaPositiva)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ods_objetivos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ods_metas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.municipio_objetivos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.municipio_metas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.municipio_tacticas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.municipio_tareas)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdTableroIndicador }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdTableroIndicador }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdTableroIndicador })
+        </td>
+    </tr>
+}
+
+</table>

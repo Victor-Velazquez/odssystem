@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ODS.DataLayer.ods_meta>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- DataTables Example -->
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Metas ODS 2035  
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_objetivo.Objetivo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Numeral)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Meta)
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_objetivo.Objetivo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Numeral)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Meta)
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ods_objetivo.Objetivo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Numeral)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Meta)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Metas del Municipio", "../ods_meta_municipio/Index", new { id = item.IdMeta }) |
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

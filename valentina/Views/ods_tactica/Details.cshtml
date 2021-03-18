@@ -1,0 +1,42 @@
+﻿@model ODS.DataLayer.ods_tactica
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ods_tactica</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_municipio.Municipio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_municipio.Municipio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tactica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tactica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vigente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vigente)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdTactica }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,106 @@
+﻿@model ODS.DataLayer.ods_tablero_indicador
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ods_tablero_indicador</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_indicador.Indicador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_indicador.Indicador)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Anio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Anio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorIndicador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorIndicador)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorAlcanzado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorAlcanzado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EscalaPositiva)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EscalaPositiva)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_objetivos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_objetivos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_metas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_metas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.municipio_objetivos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.municipio_objetivos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.municipio_metas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.municipio_metas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.municipio_tacticas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.municipio_tacticas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.municipio_tareas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.municipio_tareas)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdTableroIndicador }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

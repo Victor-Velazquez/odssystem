@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ODS.DataLayer.ods_objetivo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- DataTables Example -->
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Objetivos ODS 2035
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IdObjetivo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Objetivo)
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IdObjetivo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Objetivo)
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdObjetivo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Objetivo)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Metas", "../ods_meta/Index", new { idObjetivo = item.IdObjetivo }) 
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

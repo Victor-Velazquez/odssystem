@@ -1,0 +1,88 @@
+﻿@model ODS.DataLayer.ods_meta_municipio
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div>
+    <h4>@Html.ActionLink("Metas del Municipio", "Index")  > Eliminar</h4>
+    <h5>Al eliminar el registro se perderan los datos. ¿Esta seguro de eliminarlo?</h5>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Anio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Anio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_objetivo_municipio.ObjetivoMunicipio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_objetivo_municipio.ObjetivoMunicipio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_indicador.Indicador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_indicador.Indicador)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetaMuncipio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetaMuncipio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaTermino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaTermino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DebeCumplirse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DebeCumplirse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EscalaPositiva)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EscalaPositiva)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Cancelar", "Index")
+        </div>
+    }
+</div>

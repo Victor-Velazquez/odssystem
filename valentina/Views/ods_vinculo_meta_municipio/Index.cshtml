@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ODS.DataLayer.ods_vinculo_meta_municipio>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- DataTables Example -->
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Vincular Metas ODS 2035 con Metas del Municipio |  @Html.ActionLink("Agregar", "Create")
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_meta.ods_objetivo.Objetivo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_meta.Numeral)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_meta.Meta)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_meta_municipio.MetaMuncipio)
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_meta.ods_objetivo.Objetivo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_meta.Numeral)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_meta.Meta)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_meta_municipio.MetaMuncipio)
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ods_meta.ods_objetivo.Objetivo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ods_meta.Numeral)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ods_meta.Meta)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ods_meta_municipio.MetaMuncipio)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.IdVinculo }) |
+                            @*@Html.ActionLink("Detalles", "Details", new { id = item.IdVinculo }) |*@
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.IdVinculo })
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

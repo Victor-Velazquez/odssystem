@@ -1,0 +1,82 @@
+﻿@model ODS.DataLayer.ods_meta_municipio
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ods_meta_municipio</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_indicador.Indicador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_indicador.Indicador)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_objetivo_municipio.Numeral)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_objetivo_municipio.Numeral)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetaMuncipio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetaMuncipio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Anio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Anio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaTermino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaTermino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DebeCumplirse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DebeCumplirse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EscalaPositiva)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EscalaPositiva)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdMetaMunicipio }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

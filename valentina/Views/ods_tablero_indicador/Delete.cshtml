@@ -1,0 +1,111 @@
+﻿@model ODS.DataLayer.ods_tablero_indicador
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div>
+    <h4>@Html.ActionLink("Configurar Tablero de Indicadores", "../ods_tablero_indicador_vw/Index")  > Eliminar</h4>
+    <h5>Al eliminar el registro se perderan los datos. ¿Esta seguro de eliminarlo?</h5>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_indicador.Indicador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_indicador.Indicador)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Anio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Anio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorIndicador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorIndicador)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorAlcanzado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorAlcanzado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EscalaPositiva)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EscalaPositiva)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_objetivos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_objetivos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_metas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_metas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.municipio_objetivos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.municipio_objetivos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.municipio_metas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.municipio_metas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.municipio_tacticas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.municipio_tacticas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.municipio_tareas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.municipio_tareas)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Cancelar", "../ods_tablero_indicador_vw/Index")
+        </div>
+    }
+</div>

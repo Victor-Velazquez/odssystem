@@ -1,0 +1,34 @@
+﻿@model ODS.DataLayer.ods_vinculo_meta_municipio
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ods_vinculo_meta_municipio</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_meta.Numeral)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_meta.Numeral)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_meta_municipio.MetaMuncipio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_meta_municipio.MetaMuncipio)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdVinculo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

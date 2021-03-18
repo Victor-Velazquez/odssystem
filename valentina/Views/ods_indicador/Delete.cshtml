@@ -1,0 +1,48 @@
+﻿@model ODS.DataLayer.ods_indicador
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar Indicador </h2>
+
+<h3>¿Estas seguro de eliminar el registro?</h3>
+<div>
+    <h4>Una vez eliminado no podras recuperar la información.</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_municipio.Municipio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_municipio.Municipio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Indicador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Indicador)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vigente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vigente)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a la lista", "Index")
+        </div>
+    }
+</div>

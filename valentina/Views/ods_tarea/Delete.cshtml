@@ -1,0 +1,103 @@
+﻿@model ODS.DataLayer.ods_tarea
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div>
+    <h4>@Html.ActionLink("Tareas del Municipio", "Index")  > Eliminar</h4>
+    <h5>Al eliminar el registro se perderan los datos. ¿Esta seguro de eliminarlo?</h5>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_meta_municipio.MetaMuncipio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_meta_municipio.MetaMuncipio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_tactica.Tactica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_tactica.Tactica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_interesado.Interesado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_interesado.Interesado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_estado_tarea.EstadoTarea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_estado_tarea.EstadoTarea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tarea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tarea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaTermino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaTermino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaInicioReal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaInicioReal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaTerminoReal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaTerminoReal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Avance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Avance)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Cancelar", "Index")
+        </div>
+    }
+</div>

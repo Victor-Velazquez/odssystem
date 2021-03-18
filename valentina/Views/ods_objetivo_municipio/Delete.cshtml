@@ -1,0 +1,55 @@
+﻿@model ODS.DataLayer.ods_objetivo_municipio
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div>
+    <h4>@Html.ActionLink("Objetivos del Municipio", "Index")  > Eliminar</h4>
+    <h5>Al eliminar el registro se perderan los datos. ¿Esta seguro de eliminarlo?</h5>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_municipio.Municipio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_municipio.Municipio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Numeral)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Numeral)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ObjetivoMunicipio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ObjetivoMunicipio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vigente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vigente)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Cancelar", "Index")
+        </div>
+    }
+</div>

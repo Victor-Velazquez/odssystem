@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ODS.DataLayer.ods_municipio>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- DataTables Example -->
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Catálogo de Municipios | @Html.ActionLink("Agregar", "Create")
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_estado.Estado)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Municipio)
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ods_estado.Estado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Municipio)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.IdMunicipio }) |
+                            @Html.ActionLink("Detalles", "Details", new { id = item.IdMunicipio }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.IdMunicipio })
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

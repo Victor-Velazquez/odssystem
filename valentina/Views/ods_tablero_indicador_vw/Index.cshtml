@@ -1,0 +1,90 @@
+﻿@model IEnumerable<ODS.DataLayer.ods_tablero_indicador_vw>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Configurar Tablero de Indicadores | @Html.ActionLink("Agregar", "../ods_tablero_indicador/Create")
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Municipio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Anio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Indicador)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ValorIndicador)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ValorAlcanzado)
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Municipio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Anio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Indicador)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ValorIndicador)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ValorAlcanzado)
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Municipio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Anio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Indicador)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ValorIndicador)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ValorAlcanzado)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Agregar Metas", "../ods_meta_municipio/Create") |
+                            @Html.ActionLink("Editar", "../ods_tablero_indicador/Edit", new { id = item.IdTableroIndicador }) |
+                            @Html.ActionLink("Eliminar", "../ods_tablero_indicador/Delete", new { id = item.IdTableroIndicador })
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted">
+        
+    </div>
+</div>
+
+

@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - ODS System</title>
+
+    <!-- Custom fonts for this template-->
+    @Styles.Render("~/Themes/sbadmingh/vendor/fontawesome-free/css/all.min.css")
+
+    <!-- Page level plugin CSS-->
+    @Styles.Render("~/Themes/sbadmingh/vendor/datatables/dataTables.bootstrap4.css")
+
+    <!-- Custom styles for this template-->
+    @Styles.Render("~/Themes/sbadmingh/css/sb-admin.css")
+
+    <!-- Custom styles for datetimepicker-->
+    @Styles.Render("~/Themes/jquery-ui-1.12.1/jquery-ui.css")
+
+</head>
+<body id="page-top">
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+        <a class="navbar-brand mr-1" href="~/ods_tablero_indicador_ods_vw/Index">ODS System</a>
+
+        <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Navbar Search -->
+            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                @*<div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>*@
+                <div>
+                    @{
+                        if (Session["ods_interesado"] != null)
+                        {
+                            ODS.DataLayer.ods_interesado interesado = (ODS.DataLayer.ods_interesado)Session["ods_interesado"];
+
+                            <h6 class="dropdown-header">Bienvenido @interesado.Nombre</h6>
+                        }
+                    }
+                </div>
+            </form>
+
+            <!-- Navbar -->
+            <ul class="navbar-nav ml-auto ml-md-0">
+                @*<li class="nav-item dropdown no-arrow mx-1">
+                    <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-bell fa-fw"></i>
+                        <span class="badge badge-danger">9+</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>*@
+                @*<li class="nav-item dropdown no-arrow mx-1">
+                    <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-envelope fa-fw"></i>
+                        <span class="badge badge-danger">7</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>*@
+                <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user-circle fa-fw"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        @{
+                            if (Session["ods_interesado"] != null)
+                            {
+                                ODS.DataLayer.ods_interesado interesado = (ODS.DataLayer.ods_interesado)Session["ods_interesado"];
+
+                                <h6 class="dropdown-header">Bienvenido</h6>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item">@interesado.Nombre</a>
+                                <a class="dropdown-item">@interesado.CorreoRecuperacion</a>
+                            }
+                        }
+
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Salir</a>
+                    </div>
+                </li>
+            </ul>
+
+    </nav>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="sidebar navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="~/ods_tablero_indicador_ods_vw/Index">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Modulos</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <h6 class="dropdown-header">Configuración</h6>
+                    <a class="dropdown-item" href="~/ods_objetivo_municipio/Index">Objetivos del municipio</a>
+                    <a class="dropdown-item" href="~/ods_meta_municipio/Index">Meta del municipio</a>
+                    <a class="dropdown-item" href="~/ods_vinculo_meta_municipio/Index">Vinculo ODS 2035 Metas</a>
+                    <a class="dropdown-item" href="~/ods_interesado/Index">Interesados</a>
+                    <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">Seguimiento</h6>
+                    <a class="dropdown-item" href="~/ods_tarea/Index">Tareas</a>
+                    <a class="dropdown-item" href="~/ods_seguimiento_tarea/Index">Seguimiento Tarea</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Catálogos</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <h6 class="dropdown-header">ODS 2035</h6>
+                    <a class="dropdown-item" href="~/ods_objetivo/Index">Objetivos</a>
+                    <a class="dropdown-item" href="~/ods_meta/Index">Metas</a>
+                    <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">Entidades</h6>
+                    <a class="dropdown-item" href="~/ods_pais/Index">Pais</a>
+                    <a class="dropdown-item" href="~/ods_estado/Index">Estado</a>
+                    <a class="dropdown-item" href="~/ods_municipio/Index">Municipio</a>
+                    <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">Municipio</h6>
+                    <a class="dropdown-item" href="~/ods_indicador/Index">Indicador</a>
+                    <a class="dropdown-item" href="~/ods_tablero_indicador_vw/Index">Tablero Indicador</a>
+                    <a class="dropdown-item" href="~/ods_tactica/Index">Tacticas</a>
+                    <a class="dropdown-item" href="~/ods_interesado/Index">Interesados</a>
+                    <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">Tareas</h6>
+                    <a class="dropdown-item" href="~/ods_estado_tarea/Index">Estado Tareas</a>
+                </div>
+            </li>
+
+
+        </ul>
+
+        <div id="content-wrapper">
+
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+            <!-- /.container-fluid -->
+            <!-- Sticky Footer -->
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright ©2019 Víctor Daniel Velázquez Ramos</span>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Desesas Salir?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Selecciona "Cerrar Sesión" si tu deseas salir de ODS System.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="~/Login/CerrarSesion">Cerrar Sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    @Scripts.Render("~/Themes/sbadmingh/vendor/jquery/jquery.min.js")
+    @Scripts.Render("~/Themes/sbadmingh/vendor/bootstrap/js/bootstrap.bundle.min.js")
+
+    <!-- Core plugin JavaScript-->
+    @Scripts.Render("~/Themes/sbadmingh/vendor/jquery-easing/jquery.easing.min.js")
+
+    <!-- Page level plugin JavaScript-->
+    @Scripts.Render("~/Themes/sbadmingh/vendor/chart.js/Chart.min.js")
+    @Scripts.Render("~/Themes/sbadmingh/vendor/datatables/jquery.dataTables.js")
+    @Scripts.Render("~/Themes/sbadmingh/vendor/datatables/dataTables.bootstrap4.js")
+
+    <!-- Custom scripts for all pages-->
+    @Scripts.Render("~/Themes/sbadmingh/js/sb-admin.js")
+
+    <!-- Demo scripts for this page-->
+    @Scripts.Render("~/Themes/sbadmingh/js/demo/datatables-demo.js")
+    @Scripts.Render("~/Themes/sbadmingh/js/demo/chart-area-demo.js")
+
+    @*@Scripts.Render("~/Themes/jquery-ui-1.12.1/external/jquery/jquery.js")*@
+    @Scripts.Render("~/Themes/jquery-ui-1.12.1/jquery-ui.js")
+
+    <script>
+        $( "#datepicker" ).datepicker({
+        inline: true
+        });
+
+        $( "#FechaInicio" ).datepicker({
+        inline: true
+        });
+
+        $( "#FechaTermino" ).datepicker({
+        inline: true
+        });
+    </script>
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

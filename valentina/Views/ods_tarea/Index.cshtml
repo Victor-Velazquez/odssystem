@@ -1,0 +1,149 @@
+﻿@model IEnumerable<ODS.DataLayer.ods_tarea>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- DataTables Example -->
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Tareas del Municipio  |   @Html.ActionLink("Agregar", "Create")
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_meta_municipio.MetaMuncipio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_tactica.Tactica)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_interesado.Interesado)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Tarea)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FechaInicio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FechaTermino)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FechaInicioReal)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FechaTerminoReal)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Avance)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_estado_tarea.EstadoTarea)
+                        </th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_meta_municipio.MetaMuncipio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_tactica.Tactica)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_interesado.Interesado)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Tarea)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FechaInicio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FechaTermino)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FechaInicioReal)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FechaTerminoReal)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Avance)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_estado_tarea.EstadoTarea)
+                        </th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @{
+                                if (item.Avance >= 0 && item.Avance <= 30)
+                                {
+                                    <i class='fas fa-tachometer-alt' style='font-size:24px;color:red'></i>
+                                }
+                                else if (item.Avance > 30 && item.Avance <= 80)
+                                {
+                                    <i class='fas fa-tachometer-alt' style='font-size:24px;color:yellow'></i>
+                                }
+                                else if (item.Avance > 80 && item.Avance <= 100)
+                                {
+                                    <i class='fas fa-tachometer-alt' style='font-size:24px;color:green'></i>
+                                }
+                            }
+
+                            <a href="@Url.Action("Create", "ods_seguimiento_tarea",new { idTarea = item.IdTarea })" data-toggle="tooltip" title="Darle Seguimiento"><i class='fa fa-tasks' style='font-size:24px;color:gray'></i></a>
+                            <a href="@Url.Action("Edit", "ods_tarea",new { id = item.IdTarea })" data-toggle="tooltip" title="Editar"><i class='fa fa-pencil-alt' style='font-size:24px;color:gray'></i></a>
+                            <a href="@Url.Action("Delete", "ods_tarea", new { id = item.IdTarea })" data-toggle="tooltip" title="Eliminar"><i class='fa fa-trash-alt' style='font-size:24px;color:gray'></i></a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ods_meta_municipio.MetaMuncipio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ods_tactica.Tactica)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ods_interesado.Interesado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tarea)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaInicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaTermino)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaInicioReal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaTerminoReal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Avance)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ods_estado_tarea.EstadoTarea)
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted">
+        @Html.ActionLink("Agregar", "Create")
+    </div>
+</div>

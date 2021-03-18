@@ -1,0 +1,97 @@
+﻿@model ODS.DataLayer.ods_interesado
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <h4>ods_interesado</h4>
+    <h4>@Html.ActionLink("Interesado", "Index")  > Detalles</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ods_municipio.Municipio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ods_municipio.Municipio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Interesado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Interesado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contrasenia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contrasenia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CorreoRecuperacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CorreoRecuperacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UltimaSesion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UltimaSesion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IPUltimaSesion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IPUltimaSesion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bloqueado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bloqueado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Activo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdInteresado }) |
+    @Html.ActionLink("Cancelar", "Index")
+</p>

@@ -1,0 +1,55 @@
+﻿@model ODS.DataLayer.ods_tablero_indicador_ods_vw
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <h4>@Html.ActionLink("Tablero de Indicadores >", "Index")  > Detalle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MetasODS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetasODS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ObjetivosMunicipio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ObjetivosMunicipio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetasMunicipio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetasMunicipio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IndicadoresMunicipio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IndicadoresMunicipio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Avance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Avance)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Cancelar", "Index")
+</p>

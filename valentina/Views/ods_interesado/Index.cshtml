@@ -1,0 +1,131 @@
+﻿@model IEnumerable<ODS.DataLayer.ods_interesado>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- DataTables Example -->
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Interesados del Municipio |  @Html.ActionLink("Agregar", "Create")
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_municipio.Municipio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Interesado)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Usuario)
+                        </th>
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.Contrasenia)
+                        </th>*@
+                        <th>
+                            @Html.DisplayNameFor(model => model.CorreoRecuperacion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UltimaSesion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IPUltimaSesion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Bloqueado)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Activo)
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ods_municipio.Municipio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Interesado)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Usuario)
+                        </th>
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.Contrasenia)
+                        </th>*@
+                        <th>
+                            @Html.DisplayNameFor(model => model.CorreoRecuperacion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UltimaSesion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IPUltimaSesion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Bloqueado)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Activo)
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ods_municipio.Municipio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Interesado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Usuario)
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.Contrasenia)
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CorreoRecuperacion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UltimaSesion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IPUltimaSesion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Bloqueado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Activo)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.IdInteresado }) |
+                            @Html.ActionLink("Detalles", "Details", new { id = item.IdInteresado }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.IdInteresado })
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
