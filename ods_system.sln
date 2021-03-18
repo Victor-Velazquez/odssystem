@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "valentina", "valentina\vale
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODS.DataLayer", "ODS.DataLayer\ODS.DataLayer.csproj", "{CBD6FF96-C161-4938-8F7A-A6CE706E91A7}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "bdOdsSystem", "bdOdsSystem\bdOdsSystem.sqlproj", "{AFB4DB74-7AC5-4EE6-9985-E5C584284113}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,12 @@ Global
 		{CBD6FF96-C161-4938-8F7A-A6CE706E91A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBD6FF96-C161-4938-8F7A-A6CE706E91A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBD6FF96-C161-4938-8F7A-A6CE706E91A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFB4DB74-7AC5-4EE6-9985-E5C584284113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFB4DB74-7AC5-4EE6-9985-E5C584284113}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFB4DB74-7AC5-4EE6-9985-E5C584284113}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AFB4DB74-7AC5-4EE6-9985-E5C584284113}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFB4DB74-7AC5-4EE6-9985-E5C584284113}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFB4DB74-7AC5-4EE6-9985-E5C584284113}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
