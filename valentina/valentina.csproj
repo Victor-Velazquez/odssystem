@@ -222,6 +222,7 @@
     <Content Include="Images\big_icons\sdg-es-17.png" />
     <Content Include="Images\estado\estado-1.png" />
     <Content Include="Images\format\sdg-header-es.png" />
+    <Content Include="Images\marca\ODS.PNG" />
     <Content Include="Images\municipio\municipio-1.png" />
     <Content Include="Images\pais\pais-1.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
