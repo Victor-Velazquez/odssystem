@@ -19,7 +19,15 @@ DROP TABLE dbo.ods_estado;
 DROP TABLE dbo.ods_pais;
 DROP TABLE dbo.ods_meta;
 DROP TABLE dbo.ods_objetivo;
+DROP TABLE dbo.ods_system;
 
+CREATE TABLE dbo.ods_system
+(
+  Clave       VARCHAR(255) NOT NULL,
+  Descripcion VARCHAR(MAX) NOT NULL,
+  Valor       VARCHAR(MAX) NOT NULL
+  CONSTRAINT pk_ods_system PRIMARY KEY(Clave)
+);
 
 CREATE TABLE dbo.ods_objetivo
 (
@@ -102,11 +110,13 @@ CREATE TABLE dbo.ods_interesado
   Usuario            VARCHAR(50)   NOT NULL,
   Contrasenia        VARCHAR(1024) NOT NULL,
   CorreoRecuperacion VARCHAR(128)  NOT NULL,
-  UltimaSesion DATETIME            NOT NULL,
-  IPUltimaSesion VARCHAR(128)      NOT NULL,
-  Bloqueado                        BIT NOT NULL DEFAULT 0,
-  Activo                           BIT NOT NULL DEFAULT 1,  
-  IdMunicipio  INTEGER             NOT NULL,
+  UltimaSesion       DATETIME      NOT NULL,
+  IPUltimaSesion     VARCHAR(128)  NOT NULL,
+  Administrador      BIT NOT NULL DEFAULT 0,
+  SuperUsuario       BIT NOT NULL DEFAULT 0,
+  Bloqueado          BIT NOT NULL DEFAULT 0,
+  Activo             BIT NOT NULL DEFAULT 1,  
+  IdMunicipio        INTEGER             NOT NULL,
   CONSTRAINT pk_ods_interesado PRIMARY KEY(IdInteresado),
   CONSTRAINT fk_interesados_municipio FOREIGN KEY(IdMunicipio) REFERENCES ods_municipio(IdMunicipio)
 );

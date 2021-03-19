@@ -1,4 +1,46 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ODS.DataLayer.ods_interesado ods_interesado = null;
+    ODS.DataLayer.Modelo db = null;
+
+    ViewBag.Title = "Bienvenido";
+    ViewBag.IdMunicipio = 0;
+
+    try
+    {
+        if (ViewBag.Interesado == null)
+        {
+            if (Session != null)
+            {
+                if (Session["ods_interesado"] != null)
+                {
+                    ods_interesado = (ODS.DataLayer.ods_interesado)Session["ods_interesado"];
+
+                    db = new ODS.DataLayer.Modelo();
+
+                    ods_interesado.ods_municipio = db.ods_municipio.Find(ods_interesado.IdMunicipio);
+                    ods_interesado.ods_seguimiento_tarea = db.ods_seguimiento_tarea.SqlQuery(string.Format("select * from dbo.ods_seguimiento tarea where IdInteresado = {0}", ods_interesado.IdInteresado)).ToList();
+                }
+            }
+        }
+        else
+        {
+            ods_interesado = (ODS.DataLayer.ods_interesado)ViewBag.Interesado;
+        }
+
+        if (ods_interesado != null)
+        {
+            ViewBag.IdMunicipio = ods_interesado.ods_municipio.IdMunicipio;
+        }
+
+    }
+    catch (Exception)
+    {
+        ViewBag.Mensaje = "Debe iniciar sesión.";
+    }
+
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -28,8 +70,8 @@
         </button>
 
         <!-- Navbar Search -->
-            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-                @*<div class="input-group">
+        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+            @*<div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button">
@@ -37,21 +79,27 @@
                         </button>
                     </div>
                 </div>*@
-                <div>
-                    @{
-                        if (Session["ods_interesado"] != null)
-                        {
-                            ODS.DataLayer.ods_interesado interesado = (ODS.DataLayer.ods_interesado)Session["ods_interesado"];
+            <div>
+                @{
 
-                            <h6 class="dropdown-header">Bienvenido @interesado.Nombre</h6>
-                        }
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <h6 class="dropdown-header">Bienvenido @User.Identity.Name</h6>
+
+                        @*if (ods_interesado != null)
+                            {
+                                <h6 class="dropdown-header">Bienvenido @ods_interesado.Nombre</h6>
+                            }*@
                     }
-                </div>
-            </form>
 
-            <!-- Navbar -->
-            <ul class="navbar-nav ml-auto ml-md-0">
-                @*<li class="nav-item dropdown no-arrow mx-1">
+
+                }
+            </div>
+        </form>
+
+        <!-- Navbar -->
+        <ul class="navbar-nav ml-auto ml-md-0">
+            @*<li class="nav-item dropdown no-arrow mx-1">
                     <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-bell fa-fw"></i>
                         <span class="badge badge-danger">9+</span>
@@ -63,7 +111,7 @@
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </li>*@
-                @*<li class="nav-item dropdown no-arrow mx-1">
+            @*<li class="nav-item dropdown no-arrow mx-1">
                     <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-envelope fa-fw"></i>
                         <span class="badge badge-danger">7</span>
@@ -75,88 +123,145 @@
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </li>*@
-                <li class="nav-item dropdown no-arrow">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user-circle fa-fw"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        @{
-                            if (Session["ods_interesado"] != null)
-                            {
-                                ODS.DataLayer.ods_interesado interesado = (ODS.DataLayer.ods_interesado)Session["ods_interesado"];
-
-                                <h6 class="dropdown-header">Bienvenido</h6>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item">@interesado.Nombre</a>
-                                <a class="dropdown-item">@interesado.CorreoRecuperacion</a>
-                            }
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user-circle fa-fw"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    @{
+                        if (ods_interesado != null)
+                        {
+                            <h6 class="dropdown-header">Bienvenido</h6>
+                            <a class="dropdown-item">Ultimo inición de sesión @ods_interesado.UltimaSesion</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item">@ods_interesado.Nombre</a>
+                            <a class="dropdown-item">@ods_interesado.CorreoRecuperacion</a>
                         }
+                    }
 
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Salir</a>
-                    </div>
-                </li>
-            </ul>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Salir</a>
+                </div>
+            </li>
+        </ul>
 
     </nav>
 
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="sidebar navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="~/ods_tablero_indicador_ods_vw/Index">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
+        <!-- Despliega los menus si el usuario esta autenticado y muestra las opciones de acuerdo a su perfil.-->
+        @{
+            if (User.Identity.IsAuthenticated)
+            {
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Modulos</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                    <h6 class="dropdown-header">Configuración</h6>
-                    <a class="dropdown-item" href="~/ods_objetivo_municipio/Index">Objetivos del municipio</a>
-                    <a class="dropdown-item" href="~/ods_meta_municipio/Index">Meta del municipio</a>
-                    <a class="dropdown-item" href="~/ods_vinculo_meta_municipio/Index">Vinculo ODS 2035 Metas</a>
-                    <a class="dropdown-item" href="~/ods_interesado/Index">Interesados</a>
-                    <div class="dropdown-divider"></div>
-                    <h6 class="dropdown-header">Seguimiento</h6>
-                    <a class="dropdown-item" href="~/ods_tarea/Index">Tareas</a>
-                    <a class="dropdown-item" href="~/ods_seguimiento_tarea/Index">Seguimiento Tarea</a>
-                </div>
-            </li>
+                <ul class="sidebar navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="~/ods_tablero_indicador_ods_vw/Index">
+                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Catálogos</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                    <h6 class="dropdown-header">ODS 2035</h6>
-                    <a class="dropdown-item" href="~/ods_objetivo/Index">Objetivos</a>
-                    <a class="dropdown-item" href="~/ods_meta/Index">Metas</a>
-                    <div class="dropdown-divider"></div>
-                    <h6 class="dropdown-header">Entidades</h6>
-                    <a class="dropdown-item" href="~/ods_pais/Index">Pais</a>
-                    <a class="dropdown-item" href="~/ods_estado/Index">Estado</a>
-                    <a class="dropdown-item" href="~/ods_municipio/Index">Municipio</a>
-                    <div class="dropdown-divider"></div>
-                    <h6 class="dropdown-header">Municipio</h6>
-                    <a class="dropdown-item" href="~/ods_indicador/Index">Indicador</a>
-                    <a class="dropdown-item" href="~/ods_tablero_indicador_vw/Index">Tablero Indicador</a>
-                    <a class="dropdown-item" href="~/ods_tactica/Index">Tacticas</a>
-                    <a class="dropdown-item" href="~/ods_interesado/Index">Interesados</a>
-                    <div class="dropdown-divider"></div>
-                    <h6 class="dropdown-header">Tareas</h6>
-                    <a class="dropdown-item" href="~/ods_estado_tarea/Index">Estado Tareas</a>
-                </div>
-            </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-fw fa-folder"></i>
+                            <span>Modulos</span>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                            <h6 class="dropdown-header">Configuración</h6>
+
+                            @{ if (ods_interesado != null)
+                                {
+
+                                    if (User.IsInRole("SuperUsuario"))
+                                    {
+                                        <a class="dropdown-item" href="~/ods_objetivo_municipio/Index">Objetivos del municipio</a>
+                                        <a class="dropdown-item" href="~/ods_meta_municipio/Index">Meta del municipio</a>
+                                        <a class="dropdown-item" href="~/ods_vinculo_meta_municipio/Index">Vínculo ODS con Metas</a>
+                                        <div class="dropdown-divider"></div>
+                                        <h6 class="dropdown-header">Seguimiento</h6>
+                                        <a class="dropdown-item" href="~/ods_tarea/Index">Tareas</a>
+                                        <a class="dropdown-item" href="~/ods_seguimiento_tarea/Index">Seguimiento Tarea</a>
+                                    }
+                                    else if (User.IsInRole("Administrador"))
+                                    {
+                                        <a class="dropdown-item" href="~/ods_objetivo_municipio/Index/@ViewBag.IdMunicipio">Objetivos del municipio</a>
+                                        <a class="dropdown-item" href="~/ods_meta_municipio/Index/@ViewBag.IdMunicipio">Meta del municipio</a>
+                                        <a class="dropdown-item" href="~/ods_vinculo_meta_municipio/Index/@ViewBag.IdMunicipio">Vinculo ODS con Metas</a>
+                                        <a class="dropdown-item" href="~/ods_interesado/Index/@ViewBag.IdMunicipio">Interesados</a>
+                                        <div class="dropdown-divider"></div>
+                                        <h6 class="dropdown-header">Seguimiento</h6>
+                                        <a class="dropdown-item" href="~/ods_tarea/Index/@ViewBag.IdMunicipio">Tareas</a>
+                                        <a class="dropdown-item" href="~/ods_seguimiento_tarea/Index/@ViewBag.IdMunicipio">Seguimiento Tarea</a>
+                                    }
+                                    else if (User.IsInRole("Usuario"))
+                                    {
+                                        <h6 class="dropdown-header">Seguimiento</h6>
+                                        <a class="dropdown-item" href="@Url.Action("Index", "ods_tarea", new { IdMunicipio = @ViewBag.IdMunicipio, idInteresado = @ods_interesado.IdInteresado })">Tarea</a>
+                                        <a class="dropdown-item" href="@Url.Action("Index", "ods_seguimiento_tarea", new { IdMunicipio = @ViewBag.IdMunicipio, idInteresado = @ods_interesado.IdInteresado })">Seguimiento Tarea</a>
+                                    }
+
+                                }
+                            }
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-fw fa-folder"></i>
+                            <span>Catálogos</span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+
+                            @{
+                                if (ods_interesado != null)
+                                {
+                                    if (User.IsInRole("SuperUsuario"))
+                                    {
+                                        <h6 class="dropdown-header">ODS 2030</h6>
+                                        <a class="dropdown-item" href="~/ods_objetivo/Index">Objetivos</a>
+                                        <a class="dropdown-item" href="~/ods_meta/Index">Metas</a>
+                                        <div class="dropdown-divider"></div>
+                                        <h6 class="dropdown-header">Entidades</h6>
+                                        <a class="dropdown-item" href="~/ods_pais/Index">Pais</a>
+                                        <a class="dropdown-item" href="~/ods_estado/Index">Estado</a>
+                                        <a class="dropdown-item" href="~/ods_municipio/Index">Municipio</a>
+                                        <div class="dropdown-divider"></div>
+                                        <h6 class="dropdown-header">Municipio</h6>
+                                        <a class="dropdown-item" href="~/ods_indicador/Index">Indicador</a>
+                                        <a class="dropdown-item" href="~/ods_tablero_indicador_vw/Index">Tablero Indicador</a>
+                                        <a class="dropdown-item" href="~/ods_tactica/Index">Tacticas</a>
+                                        <a class="dropdown-item" href="~/ods_interesado/Index">Interesados</a>
+                                        <h6 class="dropdown-header">Tareas</h6>
+                                        <a class="dropdown-item" href="~/ods_estado_tarea/Index">Estado Tareas</a>
+                                    }
+                                    else if (User.IsInRole("Administrador"))
+                                    {
+                                        <h6 class="dropdown-header">Municipio</h6>
+                                        <a class="dropdown-item" href="~/ods_indicador/Index/@ViewBag.IdMunicipio">Indicador</a>
+                                        <a class="dropdown-item" href="~/ods_tablero_indicador_vw/Index/@ViewBag.IdMunicipio">Tablero Indicador</a>
+                                        <a class="dropdown-item" href="~/ods_tactica/Index/@ViewBag.IdMunicipio">Tacticas</a>
+                                        <a class="dropdown-item" href="@Url.Action("Index", "ods_interesado", new { IdMunicipio = @ViewBag.IdMunicipio })">Interesados</a>
+
+                                    }
+                                    else if (User.IsInRole("Usuario"))
+                                    {
+                                        <h6 class="dropdown-header">Municipio</h6>
+                                        <a class="dropdown-item" href="@Url.Action("Index", "ods_interesado", new { IdMunicipio = @ViewBag.IdMunicipio, idInteresado = @ods_interesado.IdInteresado })">Interesados</a>
+                                    }
+                                }
+                            }
+                        </div>
+                    </li>
+                </ul>
+
+            } <!-- Fin si esta autenticado. -->
+        }
 
 
-        </ul>
+
 
         <div id="content-wrapper">
 
@@ -202,6 +307,21 @@
         </div>
     </div>
 
+    <!-- Logout Modal Usuario No Autorizado-->
+    <div class="modal fade" id="logoutModalUnauthorizedUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Su usuario no esta autorizado.</h5>
+                </div>
+                <div class="modal-body">Debe ingresar primero a ODS System.</div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" href="~/Login/CerrarSesion">Iniciar Sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap core JavaScript-->
     @Scripts.Render("~/Themes/sbadmingh/vendor/jquery/jquery.min.js")
     @Scripts.Render("~/Themes/sbadmingh/vendor/bootstrap/js/bootstrap.bundle.min.js")
@@ -225,20 +345,39 @@
     @Scripts.Render("~/Themes/jquery-ui-1.12.1/jquery-ui.js")
 
     <script>
-        $( "#datepicker" ).datepicker({
-        inline: true
+        $("#datepicker").datepicker({
+            inline: true
         });
 
-        $( "#FechaInicio" ).datepicker({
-        inline: true
+        $("#FechaInicio").datepicker({
+            inline: true
         });
 
-        $( "#FechaTermino" ).datepicker({
-        inline: true
+        $("#FechaTermino").datepicker({
+            inline: true
         });
+
+        $(document).ready(function () {
+            $('#show_password').click(function () {
+
+                let elem = document.querySelector('#Contrasenia');
+
+                if (elem.getAttribute('type') == 'password') {
+                    //Change the attribute to text
+                    $('#Contrasenia').attr('type', 'text');
+                    $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+                }
+                else { 
+                    //Change the attribute back to password
+                    $('#Contrasenia').attr('type', 'password');
+                    $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+                }
+            });
+        });
+
     </script>
 
     @RenderSection("scripts", required: false)
 
-</body>
+    </body>
 </html>

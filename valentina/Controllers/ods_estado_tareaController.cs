@@ -14,13 +14,16 @@ namespace valentina.Controllers
     {
         private Modelo db = new Modelo();
 
+
         // GET: ods_estado_tarea
+        [Authorize(Roles = "SuperUsuario")]
         public ActionResult Index()
         {
             return View(db.ods_estado_tarea.ToList());
         }
 
         // GET: ods_estado_tarea/Details/5
+        [Authorize(Roles = "SuperUsuario")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +39,7 @@ namespace valentina.Controllers
         }
 
         // GET: ods_estado_tarea/Create
+        [Authorize(Roles = "SuperUsuario")]
         public ActionResult Create()
         {
             return View();
@@ -59,6 +63,7 @@ namespace valentina.Controllers
         }
 
         // GET: ods_estado_tarea/Edit/5
+        [Authorize(Roles = "SuperUsuario")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,6 +95,7 @@ namespace valentina.Controllers
         }
 
         // GET: ods_estado_tarea/Delete/5
+        [Authorize(Roles = "SuperUsuario")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

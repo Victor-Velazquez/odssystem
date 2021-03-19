@@ -1,12 +1,27 @@
 ﻿@model ODS.DataLayer.ods_interesado
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar";
 }
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>¿Estas seguro de eliminar el registro?</h3>
 <div>
-    <h4>@Html.ActionLink("Interesado", "Index")  > Eliminar</h4>
+
+    @{
+        if (User.IsInRole("SuperUsuario"))
+        {
+            <h4> @Html.ActionLink("Interesado", "Index") > @ViewBag.Title</h4>
+        }
+        else if (User.IsInRole("Administrador"))
+        {
+            <h4> @Html.ActionLink("Interesado", "Index", new { IdMunicipio = Model.IdMunicipio }) > @ViewBag.Title</h4>
+        }
+        else if (User.IsInRole("Usuario"))
+        {
+            <h4>@Html.ActionLink("Interesado", "Index", new { IdMunicipio = Model.IdMunicipio, idInteresado = Model.IdInteresado }) > @ViewBag.Title</h4>
+        }
+    }
+
     <h5>Al eliminar el registro se perderan los datos. ¿Esta seguro de eliminarlo?</h5>
     <hr />
     <dl class="dl-horizontal">
@@ -98,7 +113,22 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Eliminar" class="btn btn-default" /> |
-            @Html.ActionLink("Cancelar", "Index")
+
+            @{
+                if (User.IsInRole("SuperUsuario"))
+                {
+                    @Html.ActionLink("Cancelar", "Index")
+                }
+                else if (User.IsInRole("Administrador"))
+                {
+                    @Html.ActionLink("Cancelar", "Index", new { IdMunicipio = Model.IdMunicipio })
+                }
+                else if (User.IsInRole("Usuario"))
+                {
+                    @Html.ActionLink("Cancelar", "Index", new { IdMunicipio = Model.IdMunicipio, idInteresado = Model.IdInteresado })
+                }
+            }
+
         </div>
     }
 </div>

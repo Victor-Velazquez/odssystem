@@ -10,14 +10,21 @@ using ODS.DataLayer;
 
 namespace valentina.Controllers
 {
-    public class ods_municipioController : Controller
+    public class ods_municipioController : HelperController
     {
         private Modelo db = new Modelo();
 
         // GET: ods_municipio
         public ActionResult Index()
         {
+            ods_interesado ods_interesado = null;
             var ods_municipio = db.ods_municipio.Include(o => o.ods_estado);
+
+            if ((ods_interesado = this.ObtenerInteresado()) == null)
+                return RedirectToAction("Autenticar", "Login");
+
+            ViewBag.Interesado = ods_interesado;
+
             return View(ods_municipio.ToList());
         }
 
@@ -39,7 +46,14 @@ namespace valentina.Controllers
         // GET: ods_municipio/Create
         public ActionResult Create()
         {
+            ods_interesado ods_interesado = null;
+
+            if ((ods_interesado = this.ObtenerInteresado()) == null)
+                return RedirectToAction("Autenticar", "Login");
+
+            ViewBag.Interesado = ods_interesado;
             ViewBag.IdEstado = new SelectList(db.ods_estado, "IdEstado", "Estado");
+
             return View();
         }
 

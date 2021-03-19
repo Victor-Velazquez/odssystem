@@ -26,6 +26,7 @@ namespace ODS.DataLayer
 
         [Required]
         [StringLength(255)]
+        [DisplayName("Nombre Completo")]
         public string Nombre { get; set; }
 
         [Required]
@@ -47,8 +48,14 @@ namespace ODS.DataLayer
 
         [Required]
         [StringLength(128)]
-        [DisplayName("IP")]
+        [DisplayName("IP Ultima Sesión")]
         public string IPUltimaSesion { get; set; }
+
+        [DisplayName("Es Administrador")]
+        public bool Administrador { get; set; }
+
+        [DisplayName("Es Super Usuario")]
+        public bool SuperUsuario { get; set; }
 
         public bool Bloqueado { get; set; }
 

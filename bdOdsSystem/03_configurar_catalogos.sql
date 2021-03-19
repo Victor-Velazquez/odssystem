@@ -26,7 +26,7 @@ INSERT INTO ods_objetivo(Objetivo) VALUES('Vida de ecosisttemas terrestres');
 INSERT INTO ods_objetivo(Objetivo) VALUES('Paz, justicia e instituciones sólidas');
 INSERT INTO ods_objetivo(Objetivo) VALUES('Alianzas para lograr los objetivos');
 
-
+INSERT INTO ods_system(Clave,Descripcion,Valor) VALUES('VERSION','Versión','1.0.0');
 
 ----------------------------------------------------------------------------------
 

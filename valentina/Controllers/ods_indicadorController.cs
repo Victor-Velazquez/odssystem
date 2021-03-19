@@ -12,16 +12,46 @@ namespace valentina.Controllers
 {
     public class ods_indicadorController : Controller
     {
-        private Modelo db = new Modelo();
+        private readonly Modelo db = new Modelo();
 
         // GET: ods_indicador
-        public ActionResult Index()
+        [Authorize(Roles = "SuperUsuario,Administrador")]
+        public ActionResult Index(int? id)
         {
-            var ods_indicador = db.ods_indicador.Include(o => o.ods_municipio);
+            ods_interesado ods_interesado = null;
+            IQueryable<ods_indicador> ods_indicador = null;
+
+            try
+            {
+                if ((ods_interesado = (ods_interesado)Session["ods_interesado"]) == null)
+                    return RedirectToAction("Autenticar", "Login");
+
+                if (id == null)
+                    ods_indicador = db.ods_indicador;
+                else
+                {
+                    if (id != ods_interesado.IdMunicipio)
+                        id = ods_interesado.IdMunicipio;
+
+                    ods_indicador = from p in db.ods_indicador where (id == p.IdMunicipio) select p;
+                }
+                    
+                if (ods_indicador == null)
+                    return HttpNotFound();
+
+                ViewBag.Interesado = ods_interesado;
+            }
+            catch (Exception  /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Debe iniciar sesión principalmente.");
+            }
+
             return View(ods_indicador.ToList());
         }
 
         // GET: ods_indicador/Details/5
+        [Authorize(Roles = "SuperUsuario,Administrador")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +67,7 @@ namespace valentina.Controllers
         }
 
         // GET: ods_indicador/Create
+        [Authorize(Roles = "SuperUsuario,Administrador")]
         public ActionResult Create()
         {
             ViewBag.IdMunicipio = new SelectList(db.ods_municipio, "IdMunicipio", "Municipio");
@@ -62,6 +93,7 @@ namespace valentina.Controllers
         }
 
         // GET: ods_indicador/Edit/5
+        [Authorize(Roles = "SuperUsuario,Administrador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -95,6 +127,7 @@ namespace valentina.Controllers
         }
 
         // GET: ods_indicador/Delete/5
+        [Authorize(Roles = "SuperUsuario,Administrador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

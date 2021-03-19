@@ -10,16 +10,47 @@ using ODS.DataLayer;
 
 namespace valentina.Controllers
 {
-    public class ods_tablero_indicador_ods_vwController : Controller
+    public class ods_tablero_indicador_ods_vwController : HelperController
     {
         private Modelo db = new Modelo();
 
+        [Authorize(Roles ="SuperUsuario,Administrador,Usuario")] 
         // GET: ods_tablero_indicador_ods_vw
         public ActionResult Index(int? idMunicipio)
         {
-            return View(db.ods_tablero_indicador_ods_vw.ToList());
+            ods_interesado ods_interesado = null;
+            IQueryable<ods_tablero_indicador_ods_vw> ods_tablero_indicador_ods_vw = null;
+
+            try
+            {
+                if ((ods_interesado = (ods_interesado)Session["ods_interesado"]) == null)
+                    return RedirectToAction("Autenticar", "Login");
+
+                if (idMunicipio == null)
+                    ods_tablero_indicador_ods_vw = db.ods_tablero_indicador_ods_vw;
+                else
+                {
+                    if (idMunicipio != ods_interesado.IdMunicipio)
+                        idMunicipio = ods_interesado.IdMunicipio;
+
+                    ods_tablero_indicador_ods_vw = from p in db.ods_tablero_indicador_ods_vw where (ods_interesado.IdMunicipio == p.IdMunicipio) select p;
+                }
+
+                if (ods_tablero_indicador_ods_vw == null)
+                    return HttpNotFound();
+
+                ViewBag.Interesado = ods_interesado;
+            }
+            catch (Exception  /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Debe iniciar sesión principalmente.");
+            }
+
+            return View(ods_tablero_indicador_ods_vw.ToList());
         }
 
+        [Authorize(Roles = "SuperUsuario,Administrador,Usuario")]
         // GET: ods_tablero_indicador_ods_vw/Details/5
         public ActionResult Details(int? id)
         {

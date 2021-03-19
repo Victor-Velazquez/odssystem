@@ -15,6 +15,7 @@ namespace valentina.Controllers
         private Modelo db = new Modelo();
 
         // GET: ods_estado
+        [Authorize(Roles = "SuperUsuario")]
         public ActionResult Index()
         {
             var ods_estado = db.ods_estado.Include(o => o.ods_pais);
@@ -22,6 +23,7 @@ namespace valentina.Controllers
         }
 
         // GET: ods_estado/Details/5
+        [Authorize(Roles = "SuperUsuario")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace valentina.Controllers
         }
 
         // GET: ods_estado/Create
+        [Authorize(Roles = "SuperUsuario")]
         public ActionResult Create()
         {
             ViewBag.IdPais = new SelectList(db.ods_pais, "IdPais", "Pais");
@@ -62,6 +65,7 @@ namespace valentina.Controllers
         }
 
         // GET: ods_estado/Edit/5
+        [Authorize(Roles = "SuperUsuario")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -95,6 +99,7 @@ namespace valentina.Controllers
         }
 
         // GET: ods_estado/Delete/5
+        [Authorize(Roles = "SuperUsuario")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

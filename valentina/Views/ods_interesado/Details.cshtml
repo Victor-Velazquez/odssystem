@@ -1,12 +1,26 @@
 ﻿@model ODS.DataLayer.ods_interesado
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
 }
 
 <div>
-    <h4>ods_interesado</h4>
-    <h4>@Html.ActionLink("Interesado", "Index")  > Detalles</h4>
+    
+    @{
+        if (User.IsInRole("SuperUsuario"))
+        {
+            <h4> @Html.ActionLink("Interesado", "Index") > @ViewBag.Title</h4>
+        }
+        else if (User.IsInRole("Administrador"))
+        {
+            <h4> @Html.ActionLink("Interesado", "Index", new { IdMunicipio = Model.IdMunicipio }) > @ViewBag.Title</h4>
+        }
+        else if (User.IsInRole("Usuario"))
+        {
+            <h4>@Html.ActionLink("Interesado", "Index", new { IdMunicipio = Model.IdMunicipio, idInteresado = Model.IdInteresado }) > @ViewBag.Title</h4>
+        }
+    }
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -91,7 +105,21 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.IdInteresado }) |
-    @Html.ActionLink("Cancelar", "Index")
-</p>
+<div>
+
+    @{
+        if (User.IsInRole("SuperUsuario"))
+        {
+            @Html.ActionLink("Cancelar", "Index")
+        }
+        else if (User.IsInRole("Administrador"))
+        {
+            @Html.ActionLink("Cancelar", "Index", new { IdMunicipio = Model.IdMunicipio })
+        }
+        else if (User.IsInRole("Usuario"))
+        {
+            @Html.ActionLink("Cancelar", "Index", new { IdMunicipio = Model.IdMunicipio, idInteresado = Model.IdInteresado })
+        }
+    }
+
+</div>

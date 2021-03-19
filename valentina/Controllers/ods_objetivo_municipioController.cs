@@ -10,14 +10,29 @@ using ODS.DataLayer;
 
 namespace valentina.Controllers
 {
-    public class ods_objetivo_municipioController : Controller
+    public class ods_objetivo_municipioController : HelperController
     {
         private Modelo db = new Modelo();
 
         // GET: ods_objetivo_municipio
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
+            ods_interesado ods_interesado = null;
             var ods_objetivo_municipio = db.ods_objetivo_municipio.Include(o => o.ods_municipio);
+
+            try
+            {
+                if ((ods_interesado = this.ObtenerInteresado()) == null)
+                    return RedirectToAction("Autenticar", "Login");
+
+                ViewBag.Interesado = ods_interesado;
+            }
+            catch (Exception  /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Debe iniciar sesión principalmente.");
+            }
+            
             return View(ods_objetivo_municipio.ToList());
         }
 

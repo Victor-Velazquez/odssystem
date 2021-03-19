@@ -338,3 +338,7 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/valentina/Properties/ServiceDependencies/odssystem - Web Deploy/mssql1.arm.json
+/valentina/Properties/ServiceDependencies/odssystem - Web Deploy/profile.arm.json
+/valentina/Properties/serviceDependencies.json
+/valentina/Properties/serviceDependencies.odssystem - Web Deploy.json

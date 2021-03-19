@@ -1,7 +1,7 @@
 ﻿@model ODS.DataLayer.ods_interesado
 
 @{
-    ViewBag.Title = "Iniciar Sesión";
+    ViewBag.Title = "Bienvenido";
     Layout = null;
 }
 
@@ -12,9 +12,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="ODS System es un sistema de gestión de la planificación estratégica vinculada a los objetivos de desarrollo sostenible 2030 de la ONU.">
-    <meta name="author" content="Víctor Daniel Velázquez Ramos">
+    <meta name="author" content="Copyright ©2019 to ©@DateTime.Now.Year Víctor Daniel Velázquez Ramos">
 
-    <title>Inicio ODS System</title>
+    <title>Bienvenido a ODS System</title>
 
     <!-- Custom fonts for this template-->
     @Styles.Render("~/Themes/sbadmingh/vendor/fontawesome-free/css/all.min.css")
@@ -22,77 +22,135 @@
     <!-- Custom styles for this template-->
     @Styles.Render("~/Themes/sbadmingh/css/sb-admin.css")
 
+    <style>
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+        #cover {
+            background: #222 url("https://unsplash.it/1920/1080/?random&blur=2") center center no-repeat;
+            background-size: cover;
+            height: 100%;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        #cover-caption {
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        /* only used for background overlay not needed for centering */
+        form:before {
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0,0,0,0.3);
+            z-index: -1;
+            border-radius: 10px;
+        }
+        .form-group {
+            text-align: left;
+        }
+    </style>
+
 </head>
-<body class="bg-dark">
+<body>
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
 
-        <div class="container">
-            <div class="card card-login mx-auto mt-5">
-                <div class="card-header">Bienvenido a ODS System</div>
+        <section id="cover" class="min-vh-100">
+            <div id="cover-caption">
 
-                @{
-                    if (@ViewBag.Mensaje != null)
-                    {
-                        <p class="text-danger">@ViewBag.Mensaje</p>
-                    }
+                <div class="container">
+                    <div class="card card-login mx-auto mt-5">
+                        <div style="background-color: #0070C0;"><img src="~/Images/marca/ODS.PNG" alt="Logo ODS System" class="center" /></div>
+                        <div class="card-header">@ViewBag.Title</div>
+                        <div>@Html.ValidationSummary(true, "", new { @class = "text-danger" })</div>                       
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.Usuario, new { htmlAttributes = new { @class = "form-control", @id = "Usuario", @placeholder = "Usuario", @required = "required", @autofocus = "autofocus", @autocomplete = "off" } })
+                                @Html.ValidationMessageFor(model => model.Usuario)
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.Contrasenia, new { htmlAttributes = new { @class = "form-control", @type = "password", @id = "Contrasenia", @placeholder = "Contraseña", @required = "required", @autocomplete = "off" } })
+                                    <div class="input-group-append">
+                                        <button id="show_password" class="btn btn-primary" type="button">
+                                            <span class="fa fa-eye-slash icon"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Contrasenia)
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <br />
+                                    @*<label>
+                        <input type="checkbox" value="remember-me">
+                        Recordarme
+                    </label>*@
+                                </div>
+                            </div>
+                            <input type="submit" value="Iniciar Sesión" class="btn btn-primary btn-block" />
+                            <div class="text-center">
+                                <br />
+                                @*<a class="d-block small mt-3" href="register.html">Register an Account</a>*@
+                                @*<a class="d-block small" href="forgot-password.html">¿Olvidaste tu contraseña?</a>*@
+                            </div>
+                            <div class="copyright text-center my-auto">
+                                <br />
+                                <a class="d-block small">Copyright ©2019 to ©@DateTime.Now.Year Víctor Daniel Velázquez Ramos</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    }
+
+
+    @*@section Scripts {*@
+    <!-- Bootstrap core JavaScript-->
+    @Scripts.Render("~/Themes/sbadmingh/vendor/jquery/jquery.min.js")
+    @Scripts.Render("~/Themes/sbadmingh/vendor/bootstrap/js/bootstrap.bundle.min.js")
+
+    <!-- Core plugin JavaScript-->
+    @Scripts.Render("~/Themes/sbadmingh/vendor/jquery-easing/jquery.easing.min.js")
+
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+    @*}*@
+
+
+    <script>
+        $(document).ready(function () {
+            $('#show_password').click(function () {
+
+                let elem = document.querySelector('#Contrasenia');
+
+                if (elem.getAttribute('type') == 'password') {
+                    //Change the attribute to text
+                    $('#Contrasenia').attr('type', 'text');
+                    $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
                 }
+                else {
+                    //Change the attribute back to password
+                    $('#Contrasenia').attr('type', 'password');
+                    $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+                }
+            });
+        });
+    </script>
 
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="card-body">
-                <form>
-                    <div class="form-group">
-                        <div class="form-label-group">
-                            @Html.EditorFor(model => model.Usuario, new { htmlAttributes = new { @class = "form-control", @id = "inputEmail", @placeholder = "Email address", @required = "required", @autofocus = "autofocus" } })
-                            @Html.LabelFor(model => model.Usuario)
-                            @Html.ValidationMessageFor(model => model.Usuario)
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-label-group">
-                            @Html.EditorFor(model => model.Contrasenia, new { htmlAttributes = new { @class = "form-control", @type = "password", @id = "inputPassword", @placeholder = "Password", @required = "required" } })
-                            @Html.LabelFor(model => model.Contrasenia, new { htmlAttributes = new { @class = "form-control", @type = "password", @id = "inputPassword", @placeholder = "Password", @required = "required" } })
-                            @Html.ValidationMessageFor(model => model.Contrasenia)
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <br />
-                            <label>
-                                <input type="checkbox" value="remember-me">
-                                Recordarme
-                            </label>
-                        </div>
-                    </div>
-                    <input type="submit" value="Iniciar Sesión" class="btn btn-primary btn-block" />
-                </form>
-                <div class="text-center">
-                    <br />
-                    @*<a class="d-block small mt-3" href="register.html">Register an Account</a>*@
-                    <a class="d-block small" href="forgot-password.html">¿Olvidates tu contraseña?</a>
-                </div>
-                <div class="copyright text-center my-auto">
-                    <br /><br /><br />
-                    <a class="d-block small">Copyright ©2019 - @DateTime.Now.Year Víctor Daniel Velázquez Ramos</a>
-                </div>
-            </div>
-            </div>
-        </div>
-    }
-
-    @section Scripts {
-        <!-- Bootstrap core JavaScript-->
-        @Scripts.Render("~/Themes/sbadmingh/vendor/jquery/jquery.min.js")
-        @Scripts.Render("~/Themes/sbadmingh/vendor/bootstrap/js/bootstrap.bundle.min.js")
-
-        <!-- Core plugin JavaScript-->
-        @Scripts.Render("~/Themes/sbadmingh/vendor/jquery-easing/jquery.easing.min.js")
-
-        @*@Scripts.Render("~/bundles/jqueryval")*@
-    }
-
-</body>
+    </body>
 </html>

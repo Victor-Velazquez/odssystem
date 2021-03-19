@@ -10,26 +10,40 @@ using ODS.DataLayer;
 
 namespace valentina.Controllers
 {
-    public class ods_meta_municipioController : Controller
+    public class ods_meta_municipioController : HelperController
     {
-        private Modelo db = new Modelo();
+        private readonly Modelo db = new Modelo();
 
         // GET: ods_meta_municipio
         public ActionResult Index(int? id)
         {
-            var ods_meta_municipio = db.ods_meta_municipio.Include(o => o.ods_indicador).Include(o => o.ods_objetivo_municipio);
+            ods_interesado ods_interesado = null;
+            IQueryable<ods_meta_municipio> ods_meta_municipio = null;
 
-            if (id == null)
+            try
             {
-                ods_meta_municipio = db.ods_meta_municipio.Include(o => o.ods_indicador).Include(o => o.ods_objetivo_municipio);
-                return View(ods_meta_municipio.ToList());
+                if ((ods_interesado = this.ObtenerInteresado()) == null)
+                    return RedirectToAction("Autenticar", "Login");
+
+                if (id == null)
+                    ods_meta_municipio = db.ods_meta_municipio.Include(o => o.ods_indicador).Include(o => o.ods_objetivo_municipio);
+                else 
+                {
+                    if (id != ods_interesado.IdMunicipio)
+                        id = ods_interesado.IdMunicipio;
+
+                    ods_meta_municipio = from p in db.ods_meta_municipio where (id == p.IdObjetivoMunicipio) select p;
+                }
+               
+                if (ods_meta_municipio == null)
+                    return HttpNotFound();
+
+                ViewBag.Interesado = ods_interesado;
             }
-
-            ods_meta_municipio = from p in db.ods_meta_municipio where (id == p.IdObjetivoMunicipio) select p;
-
-            if (ods_meta_municipio == null)
+            catch (Exception  /* dex */)
             {
-                return HttpNotFound();
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Debe iniciar sesión principalmente.");
             }
 
             return View(ods_meta_municipio.ToList());
@@ -54,7 +68,7 @@ namespace valentina.Controllers
 
         // GET: ods_meta_municipio/Create
         public ActionResult Create()
-        {
+        {                    
             int? idMunicipio = null;
 
             if (Session["ods_interesado"] != null)
@@ -105,6 +119,19 @@ namespace valentina.Controllers
 
             ViewBag.IdIndicador = new SelectList(db.ods_indicador.OrderBy(i => i.Indicador).Where(i => i.Vigente == true).ToList(), "IdIndicador", "Indicador", ods_meta_municipio.IdIndicador);
             ViewBag.IdObjetivoMunicipio = new SelectList(db.ods_objetivo_municipio.OrderBy(o => o.ObjetivoMunicipio).Where(o => o.Vigente == true).ToList(), "IdObjetivoMunicipio", "ObjetivoMunicipio", ods_meta_municipio.IdObjetivoMunicipio);
+
+            List<SelectListItem> lstAnio = new List<SelectListItem>();
+
+            for (int valor = DateTime.Now.Year - 1; valor <= 2050; valor++)
+            {
+                SelectListItem item = new SelectListItem();
+                item.Text = string.Format("{0:0}", valor);
+                item.Value = string.Format("{0:0}", valor);
+                lstAnio.Add(item);
+            }
+
+            ViewBag.ListaAnios = new SelectList(lstAnio, "Value", "Text");
+
             return View(ods_meta_municipio);
         }
 

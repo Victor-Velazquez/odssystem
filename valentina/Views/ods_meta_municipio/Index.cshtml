@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<ODS.DataLayer.ods_meta_municipio>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = string.Format("Metas del Municipio de {0}", ViewBag.Interesado.ods_municipio.Municipio);
 }
 
     <div class="card mb-3">
         <div class="card-header">
             <i class="fas fa-table"></i>
-            Metas del Municipio  |   @Html.ActionLink("Agregar", "Create")
+            @ViewBag.Title | @Html.ActionLink("Agregar", "Create")
         </div>
         <div class="card-body">
             <div class="table-responsive">

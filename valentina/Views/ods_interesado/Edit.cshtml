@@ -1,25 +1,52 @@
 ﻿@model ODS.DataLayer.ods_interesado
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar";
 }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
+
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
 <div class="form-horizontal">
-    <h4>@Html.ActionLink("Interesado", "Index")  > Editar</h4>
+
+    @{
+        if (User.IsInRole("SuperUsuario"))
+        {
+            <h4> @Html.ActionLink("Interesado", "Index") > @ViewBag.Title</h4>
+        }
+        else if (User.IsInRole("Administrador"))
+        {
+            <h4> @Html.ActionLink("Interesado", "Index", new { IdMunicipio = Model.IdMunicipio }) > @ViewBag.Title</h4>
+        }
+        else if (User.IsInRole("Usuario"))
+        {
+            <h4>@Html.ActionLink("Interesado", "Index", new { IdMunicipio = Model.IdMunicipio, idInteresado = Model.IdInteresado }) > @ViewBag.Title</h4>
+        }
+    }
+
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.IdInteresado)
 
     <div class="form-group">
-        @Html.LabelFor(model => model.IdMunicipio, "IdMunicipio", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("IdMunicipio", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.IdMunicipio, "", new { @class = "text-danger" })
-        </div>
+        @{
+            if (User.IsInRole("SuperUsuario"))
+            {
+                @Html.LabelFor(model => model.IdMunicipio, "IdMunicipio", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("IdMunicipio", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IdMunicipio, "", new { @class = "text-danger" })
+                </div>
+            }
+            else
+            {
+                @Html.HiddenFor(model => model.IdMunicipio)
+            }
+        }
     </div>
 
     <div class="form-group">
@@ -49,9 +76,19 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Contrasenia, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Contrasenia, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="input-group">
+                @Html.EditorFor(model => model.Contrasenia, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                <div class="input-group-append">
+                    <button id="show_password" class="btn btn-primary" type="button">
+                        <span class="fa fa-eye-slash icon"></span>
+                    </button>
+                </div>
+            </div>
+
             @Html.ValidationMessageFor(model => model.Contrasenia, "", new { @class = "text-danger" })
         </div>
+
+        @Html.HiddenFor(model => model.Contrasenia, new { htmlAttributes = new { @class = "form-control", @id = "ContraseniaActual", @name = "ContraseniaActual" } })
     </div>
 
     <div class="form-group">
@@ -63,18 +100,30 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.UltimaSesion, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.HiddenFor(model => model.UltimaSesion)
+     </div>
+
+    <div class="form-group">
+        @Html.HiddenFor(model => model.IPUltimaSesion)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Administrador, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.UltimaSesion, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.UltimaSesion, "", new { @class = "text-danger" })
+            <div class="checkbox">
+                @Html.CheckBoxFor(model => model.Administrador)
+                @Html.ValidationMessageFor(model => model.Administrador, "", new { @class = "text-danger" })
+            </div>
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.IPUltimaSesion, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.SuperUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.IPUltimaSesion, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.IPUltimaSesion, "", new { @class = "text-danger" })
+            <div class="checkbox">
+                @Html.CheckBoxFor(model => model.SuperUsuario)
+                @Html.ValidationMessageFor(model => model.SuperUsuario, "", new { @class = "text-danger" })
+            </div>
         </div>
     </div>
 
@@ -82,7 +131,7 @@
         @Html.LabelFor(model => model.Bloqueado, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <div class="checkbox">
-                @Html.EditorFor(model => model.Bloqueado)
+                @Html.CheckBoxFor(model => model.Bloqueado)
                 @Html.ValidationMessageFor(model => model.Bloqueado, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -92,13 +141,11 @@
         @Html.LabelFor(model => model.Activo, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <div class="checkbox">
-                @Html.EditorFor(model => model.Activo)
+                @Html.CheckBoxFor(model => model.Activo)
                 @Html.ValidationMessageFor(model => model.Activo, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
-
-
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
@@ -106,11 +153,28 @@
         </div>
     </div>
 </div>
-}
+                    }
 
-<div>
-    @Html.ActionLink("Cancelar", "Index")
-</div>
+        <div>
+
+            @{
+                if (User.IsInRole("SuperUsuario"))
+                {
+                    @Html.ActionLink("Cancelar", "Index")
+                }
+                else if (User.IsInRole("Administrador"))
+                {
+                    @Html.ActionLink("Cancelar", "Index", new { IdMunicipio = Model.IdMunicipio })
+                }
+                else if (User.IsInRole("Usuario"))
+                {
+                    @Html.ActionLink("Cancelar", "Index", new { IdMunicipio = Model.IdMunicipio, idInteresado = Model.IdInteresado })
+                }
+            }
+
+        </div>
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
