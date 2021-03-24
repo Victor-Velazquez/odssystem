@@ -12,7 +12,7 @@ Su funcionamiento es el siguiente:
 
 * c. Cada meta se debe asociar o vincular con una de las metas de los ODS 2030.
 
-d. Para cada meta se le asignan tareas, el número de tareas asociadas a la meta es igual al 100% del valor establecido en la meta, es decir si se cumplen todas las tareas, entonces se cumple con el valor establecido en la meta. (esto lo hace el sistema en automático).
+* d. Para cada meta se le asignan tareas, el número de tareas asociadas a la meta es igual al 100% del valor establecido en la meta, es decir si se cumplen todas las tareas, entonces se cumple con el valor establecido en la meta. (esto lo hace el sistema en automático).
 
 * e. Para que una tarea tenga avance, se le debe dar seguimiento, y en el seguimiento se marca el valor de avance.
 
