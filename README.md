@@ -1,6 +1,6 @@
 ![ODS SYSTEM](https://github.com/Victor-Velazquez/odssystem/blob/master/valentina/Images/marca/ODS.PNG)
 
-#ODS SYSTEM 
+# ODS SYSTEM
 
 Permite alinear los objetivos del mapa estratégico con los objetivos de desarrollo sostenible, habilitando la gestión y colaboración de los involucrados en el portafolio de proyectos.
 
