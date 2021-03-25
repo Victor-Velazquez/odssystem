@@ -22,7 +22,7 @@ Su funcionamiento es el siguiente:
 
 1. Cada tarea que avanza empuja las metas para que se cumplan, y las metas empujan al indicador al que están asociado.
 
-Copyright (C) 2019 Víctor Daniel Velázquez Ramos
+__Copyright (C) 2019 Víctor Daniel Velázquez Ramos__
 
 Este programa es software libre: puede redistribuirlo y/o modificarlo bajo los términos de la Licencia General Pública de GNU publicada por la Free Software Foundation en su versión 3 de la Licencia o posterior 3+. Consultar la licencia [aquí](https://github.com/Victor-Velazquez/odssystem/blob/master/LICENSE)
 
